@@ -1,70 +1,75 @@
-// fetch the dog list from the api
 document.addEventListener('DOMContentLoaded', function() {
     const loading = document.getElementById('loading');
+    const breedSelect = document.getElementById('breedSelect');
+    const slideshowImage = document.getElementById('slideshowImage');
+    let slideshowInterval;
+
+
+    // Show loading indicator
     loading.style.display = 'block';
+
+    // Fetch dog breeds and populate dropdown
     fetch('https://dog.ceo/api/breeds/list/all')
-    .then(response => {
-         if(!response.ok){
-             throw new Error('Error fetching dog list')
-         }
-         return response.json();
-    })
-    .then(data => {
-        console.log('Dog list', data.message);
-
-        const breeds = data.message;
-        const breedsList = document.getElementById('breedsList')
-
-        for(const breed in breeds) {
-            const breedItem = document.createElement('div');
-            breedItem.classList.add('breed-item');
-            breedItem.style.listStyle = 'none'
-            breedItem.textContent = breed;
-            breedItem.style.marginTop = '10%'
-            breedItem.addEventListener('click', () => fetchBreedImage(breed, breedItem));
-
-            breedsList.appendChild(breedItem);
-        }
-    })
-    .catch(error => {
-        console.error('Error Fetching Data', error);
-    })
-    .finally(() => {
-        loading.style.display = 'none';
-    })
-
-});
-
-// fetch random image from the api
-function fetchBreedImage(breed, breedItem) {
-    fetch('https://dog.ceo/api/breeds/image/random')
-.then(response => {
-    if (!response.ok){
-        throw new Error('Unable to fetch image');
-    }
-    return response.json();
-})
- .then(data => {
-    const dogImage = document.createElement('img');
-    dogImage.src = data.message;
-    dogImage.alt = `${breed} image`;
-    dogImage.style.maxWidth = '100%'
-    dogImage.style.borderRadius = '10px'
-
-    breedItem.appendChild(dogImage);
-  })
-  .catch (error => {
-    console.error('Error fetching image',  error);
-  });
-};
-
-// filter the breeds as the user types
-const searchBreed = document.getElementById('searchBreed');
-    searchBreed.addEventListener('input', (e) => {
-        const query = e.target.value.toLowerCase();
-        const breedItem = document.querySelectorAll('.breed-item');
-        breedItem.forEach(item => {
-            const breedText = item.textContent.toLowerCase();
-            item.style.display = breedText.includes(query) ? 'inline' : 'none';
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Error fetching dog list');
+            }
+            return response.json();
+        })
+        .then(data => {
+            const breeds = data.message;
+            for (const breed in breeds) {
+                const option = document.createElement('option');
+                option.value = breed;
+                option.textContent = breed.charAt(0).toUpperCase() + breed.slice(1);
+                breedSelect.appendChild(option);
+            }
+        })
+        .catch(error => {
+            console.error('Error Fetching Data', error);
+        })
+        .finally(() => {
+            loading.style.display = 'none';
         });
+
+    // Start slideshow on breed selection
+    breedSelect.addEventListener('change', () => {
+        const breed = breedSelect.value;
+        if (breed) {
+            startSlideshow(breed);
+        } else {
+            stopSlideshow();
+        }
     });
+
+    // Start the slideshow by fetching breed images
+    function startSlideshow(breed) {
+        stopSlideshow(); // Clear any previous interval
+        slideshowInterval = setInterval(() => fetchBreedImage(breed), 3000);
+    }
+
+    // Stop the slideshow
+    function stopSlideshow() {
+        clearInterval(slideshowInterval);
+        slideshowImage.src = ''; // Clear the image when no breed is selected
+    }
+
+    // Fetch and display a random image of the selected breed
+    function fetchBreedImage(breed) {
+        fetch(`https://dog.ceo/api/breed/${breed}/images/random`)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Unable to fetch image');
+                }
+                return response.json();
+            })
+            .then(data => {
+                slideshowImage.src = data.message;
+                slideshowImage.alt = `${breed} image`;
+            })
+            .catch(error => {
+                console.error('Error fetching image', error);
+            });
+    }
+    
+});
