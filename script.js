@@ -2,6 +2,9 @@ document.addEventListener('DOMContentLoaded', function() {
     const loading = document.getElementById('loading');
     const breedSelect = document.getElementById('breedSelect');
     const slideshowImage = document.getElementById('slideshowImage');
+    const searchBar = document.getElementById('searchBar');
+    const searchBtn = document.getElementById('searchBtn');
+    const listContainer = document.getElementById('list-container');
     let slideshowInterval;
 
 
@@ -19,6 +22,8 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(data => {
             const breeds = data.message;
             for (const breed in breeds) {
+
+                // Add to dropdown
                 const option = document.createElement('option');
                 option.value = breed;
                 option.textContent = breed.charAt(0).toUpperCase() + breed.slice(1);
@@ -37,8 +42,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const breed = breedSelect.value;
         if (breed) {
             startSlideshow(breed);
+            listContainer.style.display = 'none';
         } else {
             stopSlideshow();
+            listContainer.style.display = 'flex';
         }
     });
 
@@ -52,6 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
     function stopSlideshow() {
         clearInterval(slideshowInterval);
         slideshowImage.src = ''; // Clear the image when no breed is selected
+        slideshowImage.alt = ''; // Clear the image alt text when no breed is selected
     }
 
     // Fetch and display a random image of the selected breed
@@ -71,5 +79,18 @@ document.addEventListener('DOMContentLoaded', function() {
                 console.error('Error fetching image', error);
             });
     }
+
+    searchBtn.addEventListener('click', ()=> {
+        const search = searchBar.value.toLowerCase().trim();
+        if (search){
+            startSlideshow(search);
+            listContainer.style.display = 'none';
+        } else {
+            stopSlideshow();
+            alert('Please enter a breed name');
+            listContainer.style.display = 'flex';
+        }
+    });
     
 });
+

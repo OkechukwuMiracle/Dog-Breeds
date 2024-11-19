@@ -7,8 +7,7 @@
 body {
     width: 100%;
     font-family: "Poppins", serif;
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-color: #d0d8d3;
     overflow: hidden;
 }
 
@@ -23,6 +22,14 @@ body {
     background-color: rgb(109, 98, 98);
 }
 
+.header-nav {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 4%;
+}
+
 h1 {
     font-size: 2rem;
     margin-bottom: 1.5%;
@@ -33,8 +40,8 @@ h1 {
 }
 
 #breedSelect{
-    width: 30%;
-    padding: 1%;
+    padding: 6%;
+    margin-right: 2%;
     margin-bottom: 1%;
     font-size: 1.2rem;
     border-radius: 10px;
@@ -42,6 +49,40 @@ h1 {
     background-color: rgb(241, 239, 239);
     color: rgb(90, 86, 86);
     outline: 0;
+}
+
+.input-container {
+    display: flex;
+    /* gap: 5px; */
+    /* margin-bottom: 1%; */
+    /* padding: 5%; */
+}
+
+#searchBar {
+    /* width: 25%; */
+    font-size: 1.2rem;
+    margin-bottom: 1%;
+    padding: 4%;
+    border-radius: 10px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 1px solid rgb(209, 203, 203);
+    background-color: rgb(241, 239, 239);
+    color: rgb(90, 86, 86);
+    outline: 0;
+}
+
+#searchBtn {
+    padding: 4%;
+    font-size: 1.2rem;
+    margin-bottom: 1%;
+    cursor: pointer;
+    color: black;
+    background-color: #0ddd64;
+    outline: none;
+    border: none;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 #loading {
@@ -52,11 +93,11 @@ h1 {
 }
 
 #slideshowContainer {
-    width: 40%;
+    width: 50%;
     flex: 1;
     position: relative;
     margin : 0 auto;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 #slideshowImage {
@@ -64,16 +105,82 @@ h1 {
     object-fit: cover;
 }
 
+#list-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    gap: 2%;
+    position: absolute;
+    top: 35%;
+    padding-inline: 2%;
+    flex: 1;
+}
 
-@media screen and (max-width: 885px) {
-    #breedSelect {
-        width: 70%;
-    }
+.breedlist-container {
+    width: 25%;
+    height: 50vh;
+    border: 1px solid black;
+    border-radius: 15px;
+    background-color: rgb(100, 95, 95);
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #0ddd64;
+}
+
+.image-container {
+    width: 90%;
+    height: 100%;
+    margin: 0 auto;
+    object-fit: cover;
+}
+
+.image-container img {
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+
+@media screen and (max-width: 1000px) {
     #slideshowContainer {
         width: 100%;
     }
-    #breedSelect {
-        padding: 2%;
+
+    #slideshowContainer img {
+        width: 100%;
+        height: 100vh;
+    }
+
+    #list-container {
+        top: 16%;
+        flex-wrap: wrap;
+    }
+    .breedlist-container {
+        width: 45%;
+        height: 38vh;
+        margin-top: 2%;
+    }
+    
+}
+
+@media screen and (max-width: 600px) {
+    .header-nav {
+        flex-direction: column-reverse;
+        padding-right: 10%;
+    }
+    #list-container {
+        top: 25%;
+    }
+    .breedlist-container {
+        height: 34vh;
+    }
+    h2 {
+        font-size: 1.2rem;
     }
 }
 

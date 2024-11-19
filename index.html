@@ -14,15 +14,53 @@
     <div id="breedsContainer">
         <div class="header">
             <h1>Dog Breeds</h1>
-            <select id="breedSelect">
-                <option value="">Select a breed</option>
-            </select>
+            <div class="header-nav">
+                <div>
+                    <select id="breedSelect">
+                        <option value="">Select a breed</option>
+                    </select>
+                </div>
+                <div class="input-container">
+                    <input type="text" id="searchBar" placeholder="Input a breed" required>
+                    <button id="searchBtn">Search</button>
+                </div>
+            </div>
         </div>
         <div id="loading">Loading...</div>
         <div id="slideshowContainer">
                 <img id="slideshowImage" src="" alt="" />
         </div>
     </div>
+    <div id="list-container">
+        <div class="breedlist-container">
+            <h2>Doberman</h2>
+            <div class="image-container">
+                <img src="./assets/doberman.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="breedlist-container">
+            <h2>Husky</h2>
+            <div class="image-container">
+                <img src="./assets/husky.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="breedlist-container">
+            <h2>Newfoundland</h2>
+            <div class="image-container">
+                <img src="./assets/newfoundland.jpg" alt="">
+            </div>
+        </div>
+
+        <div class="breedlist-container">
+            <h2>Pitbull</h2>
+            <div class="image-container">
+                <img src="./assets/pitbull.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    
 
     <script src="script.js"></script>
 </body>
