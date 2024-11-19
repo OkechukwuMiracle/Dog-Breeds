@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const searchBar = document.getElementById('searchBar');
     const searchBtn = document.getElementById('searchBtn');
     const listContainer = document.getElementById('list-container');
+    const breedListContainer = document.querySelector('.breedlist-container')
     let slideshowInterval;
 
 
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
         clearInterval(slideshowInterval);
         slideshowImage.src = ''; // Clear the image when no breed is selected
         slideshowImage.alt = ''; // Clear the image alt text when no breed is selected
+        breedListContainer.alt = '';
     }
 
     // Fetch and display a random image of the selected breed
