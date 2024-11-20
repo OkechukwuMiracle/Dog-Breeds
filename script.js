@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Stop the slideshow
     function stopSlideshow() {
         clearInterval(slideshowInterval);
-        slideshowImage.src = ''; // Clear the image when no breed is selected
-        slideshowImage.alt = ''; // Clear the image alt text when no breed is selected
+        slideshowImage.src = "https://via.placeholder.com/300?text=Dog+Breed+Image"; // Clear the image when no breed is selected
+        slideshowImage.alt = 'Dog Breed Image'; // Clear the image alt text when no breed is selected
         breedListContainer.alt = '';
     }
 
